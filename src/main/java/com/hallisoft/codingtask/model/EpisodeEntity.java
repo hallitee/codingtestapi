@@ -1,9 +1,7 @@
 package com.hallisoft.codingtask.model;
 
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-//import org.hibernate.annotations.*;
 import java.util.Date;
 
 @Entity
@@ -30,11 +28,35 @@ public class EpisodeEntity extends AuditModel {
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            },
-            mappedBy = "episodes")
-    private Set<CharacterEntity> characters = new HashSet<>();
+            })
+    @JoinTable(name = "character_episode",
+            joinColumns = { @JoinColumn(name = "episode_id") },
+            inverseJoinColumns = { @JoinColumn(name = "character_id") })
+    private Set<CharacterEntity> characters;
 
- /*   @OneToMany(mappedBy = "episodes")
-    private Set<CommentEntity> episodeComments;*/
+    @OneToMany(mappedBy = "episode")
+    private Set<CommentEntity> episodeComments;
+
+    public Long getId(){
+        return  id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getReleaseDate() {
+        return releaseDate.toString();
+    }
+    public String getEpisodeCode() {
+        return episodeCode;
+    }
+    public int getComments() {
+        return episodeComments.size();
+    }
+    public EpisodeEntity(){
+
+    }
+    public EpisodeEntity(Long id){
+        this.id = id;
+    }
 
 }

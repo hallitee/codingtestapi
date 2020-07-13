@@ -1,9 +1,7 @@
 package com.hallisoft.codingtask.model;
 
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-//import org.hibernate.annotations.*;
 
 
 @Entity
@@ -37,15 +35,8 @@ public class CharacterEntity extends AuditModel{
     @JoinColumn(unique = true)
     private LocationEntity location;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "character_episode",
-            joinColumns = { @JoinColumn(name = "character_id") },
-            inverseJoinColumns = { @JoinColumn(name = "episode_id") })
-    private Set<EpisodeEntity> episodes = new HashSet<>();
+    @ManyToMany(mappedBy = "characters")
+    private Set<EpisodeEntity> episodes;
 
     public enum Status {
         ACTIVE, DEAD, UNKNOWN;
@@ -74,4 +65,5 @@ public class CharacterEntity extends AuditModel{
     public String getOrigin(){
         return stateOfOrigin;
     }
+
 }

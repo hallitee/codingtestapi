@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "comments")
 
-public class CommentEntity {
+public class CommentEntity extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +19,22 @@ public class CommentEntity {
 
 
     @Column(name = "ip_address_location", nullable = false)
-    private String ipAddressLocation;
+    private String ipAddress;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "episodeComments", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private EpisodeEntity episode;
+
+    public String getIpAddress(){
+        return ipAddress;
+    }
+    public String getComment(){
+        return comment;
+    }
+    public void setEpisode(EpisodeEntity episode) {
+        this.episode = episode;
+    }
+
 }

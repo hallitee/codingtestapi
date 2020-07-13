@@ -1,21 +1,17 @@
 package com.hallisoft.codingtask.controller;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
-import com.hallisoft.codingtask.exception.ResourceNotFoundException;
 import com.hallisoft.codingtask.model.CharacterEntity;
-import java.util.List;
 
-import com.hallisoft.codingtask.model.LocationEntity;
 import com.hallisoft.codingtask.repository.CharacterRepository;
+import com.hallisoft.codingtask.repository.EpisodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/characters")
@@ -23,6 +19,8 @@ public class CharacterController {
 
     @Autowired
     private CharacterRepository characterRepository;
+    @Autowired
+    private EpisodeRepository  episodeRepository;
 
     @GetMapping
     public Page<CharacterEntity> getAllCharacters(@RequestParam(defaultValue = "id") String sortField, @RequestParam(required = false) String filter, @RequestParam(required = false) String filterBy,
@@ -49,29 +47,5 @@ public class CharacterController {
         }
         return result;
     }
-
-//    @PostMapping("/posts")
-//    public Post createPost(@Valid @RequestBody Post post) {
-//        return postRepository.save(post);
-//    }
-//
-//    @PutMapping("/posts/{postId}")
-//    public Post updatePost(@PathVariable Long postId, @Valid @RequestBody Post postRequest) {
-//        return postRepository.findById(postId).map(post -> {
-//            post.setTitle(postRequest.getTitle());
-//            post.setDescription(postRequest.getDescription());
-//            post.setContent(postRequest.getContent());
-//            return postRepository.save(post);
-//        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
-//    }
-//
-//
-//    @DeleteMapping("/posts/{postId}")
-//    public ResponseEntity<?> deletePost(@PathVariable Long postId) {
-//        return postRepository.findById(postId).map(post -> {
-//            postRepository.delete(post);
-//            return ResponseEntity.ok().build();
-//        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
-//    }
 
 }

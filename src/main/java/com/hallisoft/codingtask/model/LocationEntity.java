@@ -1,8 +1,6 @@
 package com.hallisoft.codingtask.model;
 
-
 import javax.persistence.*;
-//import org.hibernate.annotations.*;
 
 @Entity
 @Table(name = "locations")
