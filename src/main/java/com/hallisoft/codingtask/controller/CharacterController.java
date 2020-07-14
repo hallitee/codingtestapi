@@ -23,27 +23,27 @@ public class CharacterController {
     private EpisodeRepository  episodeRepository;
 
     @GetMapping
-    public Page<CharacterEntity> getAllCharacters(@RequestParam(defaultValue = "id") String sortField, @RequestParam(required = false) String filter, @RequestParam(required = false) String filterBy,
+    public Page<CharacterEntity> getAllCharacters(@RequestParam(defaultValue = "id") String sortBy, @RequestParam(required = false) String filterBy, @RequestParam(required = false) String filter,
                                                   @RequestParam( defaultValue ="ASC") String dir ,  @RequestParam( defaultValue = "10") int size, @RequestParam( defaultValue = "1") int page, Pageable pageable) {
-        if(sortField.equalsIgnoreCase("firstName") || sortField.equalsIgnoreCase("lastName") || sortField.equalsIgnoreCase("gender")){
+        if(sortBy.equalsIgnoreCase("firstName") || sortBy.equalsIgnoreCase("lastName") || sortBy.equalsIgnoreCase("gender")){
 
         }else{
-                sortField = "id";
+                sortBy = "id";
         }
-        Sort sort = dir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-                Sort.by(sortField).descending();
+        Sort sort = dir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() :
+                Sort.by(sortBy).descending();
         pageable = PageRequest.of(page-1,size, sort);
         Page<CharacterEntity> result = null;
-        if(filter == null) {
+        if(filterBy == null) {
             result = characterRepository.findAll(pageable);
-        }else if( filter.equalsIgnoreCase("gender")){
-           result = characterRepository.findByGenderIsLike(CharacterEntity.Gender.valueOf(filterBy.toUpperCase()), pageable);
+        }else if( filterBy.equalsIgnoreCase("gender")){
+           result = characterRepository.findByGenderIsLike(CharacterEntity.Gender.valueOf(filter.toUpperCase()), pageable);
         }
-        else if( filter.equalsIgnoreCase("status")){
-            result = characterRepository.findByStatusIsLike(CharacterEntity.Status.valueOf(filterBy.toUpperCase()), pageable);
+        else if( filterBy.equalsIgnoreCase("status")){
+            result = characterRepository.findByStatusIsLike(CharacterEntity.Status.valueOf(filter.toUpperCase()), pageable);
         }
-        else if(filter.equalsIgnoreCase("location")){
-            result = characterRepository.findByLocation_Name(filterBy, pageable);
+        else if(filterBy.equalsIgnoreCase("location")){
+            result = characterRepository.findByLocation_Name(filter, pageable);
         }
         return result;
     }
