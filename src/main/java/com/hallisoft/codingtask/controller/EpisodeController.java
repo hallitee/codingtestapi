@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/episodes")
-public class EpisodeController {
+public class EpisodeController  {
 
     @Autowired
     private EpisodeRepository episodeRepository;
@@ -33,7 +33,7 @@ public class EpisodeController {
         return episodeRepository.findAll(pageable);
     }
     @GetMapping("/character/{Id}")
-    public Page<EpisodeEntity> getEpisodesByCharacterId( @PathVariable (value = "Id") Long Id,Pageable pageable){
+    public Page<EpisodeEntity> getEpisodesByCharacterId( @PathVariable (value = "Id") Long Id,Pageable pageable)  throws ResourceNotFoundException{
         if(Id!=null) {
         return episodeRepository.findAllByCharacters_Id(Id, pageable);
 

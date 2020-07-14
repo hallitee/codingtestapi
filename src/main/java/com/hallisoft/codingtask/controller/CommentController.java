@@ -31,11 +31,11 @@ public class CommentController {
 
     @PostMapping("/{postId}/episode")
     public CommentEntity createComment(@PathVariable (value = "postId") Long postId,
-                                @RequestBody CommentEntity comment) {
+                                @RequestBody CommentEntity comment)  throws ResourceNotFoundException{
         return episodeRepository.findById(postId).map(episode -> {
             comment.setEpisode(episode);
             return commentRepository.save(comment);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Record not found"));
     }
 
 }
