@@ -60,7 +60,7 @@ descending order.
 # API ENDPOINTS
 # 1.) POST – Post a comment on an episode
 ```
-http://localhost:8080/api/comments/{id}/episode
+http://codingtestapi.herokuapp.com/api/comments/{id}/episode
 ```
 ## Request
 * Header - Content-Type: application/json
@@ -82,7 +82,7 @@ http://localhost:8080/api/comments/{id}/episode
 ```
 # 2.) GET  – 	List of all Episodes
 ```
-http://localhost:8080/api/episodes
+http://codingtestapi.herokuapp.com/api/episodes
 ```
 ## Response - 200
 * Body 
@@ -103,7 +103,7 @@ http://localhost:8080/api/episodes
 
 # 3.) GET  – 	List of all comments
 ```
-http://localhost:8080/api/comments
+http://codingtestapi.herokuapp.com/api/comments
 ```
 
 ## Response - 200
@@ -122,7 +122,7 @@ http://localhost:8080/api/comments
 ```
 # 4.) GET  – 	List of all characters
 ```
-http://localhost:8080/api/characters
+http://codingtestapi.herokuapp.com/api/characters
 ```
 
 ## Parameters
@@ -155,7 +155,7 @@ http://localhost:8080/api/characters
 
 # 5.) GET  – 	Search all episodes a character featured in
 ```
-	http://localhost:8080/api/episodes/character/{id}
+	http://codingtestapi.herokuapp.com/api/episodes/character/{id}
 ```
 
 ## Response - 200
